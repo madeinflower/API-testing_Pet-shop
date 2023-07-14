@@ -1,0 +1,415 @@
+{
+	"info": {
+		"_postman_id": "59afb887-bcf5-4ded-823b-5a116da83966",
+		"name": "My collection_100723",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22558597"
+	},
+	"item": [
+		{
+			"name": "Pet",
+			"item": [
+				{
+					"name": "Add new pet to store",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 500ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);",
+									"});",
+									"console.log(pm.response);",
+									"",
+									"var jsonData = pm.response.json();",
+									"pm.test(\"Status check\", function () {",
+									"    pm.expect(jsonData.status).to.eql(\"available\");",
+									"});",
+									"",
+									"pm.test(\"Pet name is correct\", function () {",
+									"    pm.expect(jsonData.name).to.eql(\"doggie\");",
+									"});",
+									"",
+									"console.log(typeof(jsonData.id))",
+									"",
+									"pm.test(\"ID of pet is correct\", function () {",
+									"pm.expect(jsonData.id).to.eql(parseInt(pm.environment.get(\"PET_ID\")))",
+									"});",
+									"",
+									"pm.test(\"Name of pet is correct\", function () {",
+									"pm.expect(jsonData.name).to.eql(pm.environment.get(\"PET_NAME\"))",
+									"});",
+									"",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// pm.environment.set(\"PET_ID\", 123)",
+									"// pm.environment.set(\"PET_NAME\", \"doggie\")",
+									"",
+									"var PET_ID = pm.variables.replaceIn('{{$randomInt}}');",
+									"",
+									"",
+									"pm.sendRequest(\"https://petstore.swagger.io/v2/pet/\" + PET_ID, function (err, response) {",
+									"    var getPetJson = response.json();",
+									"    console.log(getPetJson);",
+									"    pm.test(\"Check\", function() {",
+									"        pm.expect(getPetJson.message).to.eql(\"Pet not found\");",
+									"    });",
+									"});",
+									"",
+									"pm.environment.set(\"PET_ID\", parseInt(PET_ID));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": {{PET_ID}},\n    \"category\": {\n        \"id\": 0,\n        \"name\": \"string\"\n    },\n    \"name\": \"{{PET_NAME}}\",\n    \"photoUrls\": [\n        \"string\"\n    ],\n    \"tags\": [\n        {\n            \"id\": 0,\n            \"name\": \"string\"\n        }\n    ],\n    \"status\": \"available\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://petstore.swagger.io/v2/pet",
+							"protocol": "https",
+							"host": [
+								"petstore",
+								"swagger",
+								"io"
+							],
+							"path": [
+								"v2",
+								"pet"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add new pet to store Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 500ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);",
+									"});",
+									"console.log(pm.response);",
+									"",
+									"var jsonData = pm.response.json();",
+									"pm.test(\"Status check\", function () {",
+									"    pm.expect(jsonData.status).to.eql(\"available\");",
+									"});",
+									"",
+									"pm.test(\"Pet name is correct\", function () {",
+									"    pm.expect(jsonData.name).to.eql(\"doggie\");",
+									"});",
+									"",
+									"console.log(typeof(jsonData.id))",
+									"",
+									"pm.test(\"ID of pet is correct\", function () {",
+									"pm.expect(jsonData.id).to.eql(parseInt(pm.environment.get(\"PET_ID\")))",
+									"});",
+									"",
+									"pm.test(\"Name of pet is correct\", function () {",
+									"pm.expect(jsonData.name).to.eql(pm.environment.get(\"PET_NAME\"))",
+									"});",
+									"",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// pm.environment.set(\"PET_ID\", 123)",
+									"// pm.environment.set(\"PET_NAME\", \"doggie\")",
+									"",
+									"var PET_ID = pm.variables.replaceIn('{{$randomInt}}');",
+									"",
+									"",
+									"pm.sendRequest(\"https://petstore.swagger.io/v2/pet/\" + PET_ID, function (err, response) {",
+									"    var getPetJson = response.json();",
+									"    console.log(getPetJson);",
+									"    pm.test(\"Check\", function() {",
+									"        pm.expect(getPetJson.message).to.eql(\"Pet not found\");",
+									"    });",
+									"});",
+									"",
+									"pm.environment.set(\"PET_ID\", parseInt(PET_ID));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": {{PET_ID}},\n    \"category\": {\n        \"id\": 0,\n        \"name\": \"string\"\n    },\n    \"name\": \"{{PET_NAME}}\",\n    \"photoUrls\": [\n        \"string\"\n    ],\n    \"tags\": [\n        {\n            \"id\": 0,\n            \"name\": \"string\"\n        }\n    ],\n    \"status\": \"available\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://petstore.swagger.io/v2/pet",
+							"protocol": "https",
+							"host": [
+								"petstore",
+								"swagger",
+								"io"
+							],
+							"path": [
+								"v2",
+								"pet"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add new pet to store Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 500ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);",
+									"});",
+									"console.log(pm.response);",
+									"",
+									"var jsonData = pm.response.json();",
+									"pm.test(\"Status check\", function () {",
+									"    pm.expect(jsonData.status).to.eql(\"available\");",
+									"});",
+									"",
+									"pm.test(\"Pet name is correct\", function () {",
+									"    pm.expect(jsonData.name).to.eql(\"doggie\");",
+									"});",
+									"",
+									"console.log(typeof(jsonData.id))",
+									"",
+									"pm.test(\"ID of pet is correct\", function () {",
+									"pm.expect(jsonData.id).to.eql(parseInt(pm.environment.get(\"PET_ID\")))",
+									"});",
+									"",
+									"pm.test(\"Name of pet is correct\", function () {",
+									"pm.expect(jsonData.name).to.eql(pm.environment.get(\"PET_NAME\"))",
+									"});",
+									"",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// pm.environment.set(\"PET_ID\", 123)",
+									"// pm.environment.set(\"PET_NAME\", \"doggie\")",
+									"",
+									"var PET_ID = pm.variables.replaceIn('{{$randomInt}}');",
+									"",
+									"",
+									"pm.sendRequest(\"https://petstore.swagger.io/v2/pet/\" + PET_ID, function (err, response) {",
+									"    var getPetJson = response.json();",
+									"    console.log(getPetJson);",
+									"    pm.test(\"Check\", function() {",
+									"        pm.expect(getPetJson.message).to.eql(\"Pet not found\");",
+									"    });",
+									"});",
+									"",
+									"pm.environment.set(\"PET_ID\", parseInt(PET_ID));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": {{PET_ID}},\n    \"category\": {\n        \"id\": 0,\n        \"name\": \"string\"\n    },\n    \"name\": \"{{PET_NAME}}\",\n    \"photoUrls\": [\n        \"string\"\n    ],\n    \"tags\": [\n        {\n            \"id\": 0,\n            \"name\": \"string\"\n        }\n    ],\n    \"status\": \"available\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://petstore.swagger.io/v2/pet",
+							"protocol": "https",
+							"host": [
+								"petstore",
+								"swagger",
+								"io"
+							],
+							"path": [
+								"v2",
+								"pet"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add new pet to store Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 500ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);",
+									"});",
+									"console.log(pm.response);",
+									"",
+									"var jsonData = pm.response.json();",
+									"pm.test(\"Status check\", function () {",
+									"    pm.expect(jsonData.status).to.eql(\"available\");",
+									"});",
+									"",
+									"pm.test(\"Pet name is correct\", function () {",
+									"    pm.expect(jsonData.name).to.eql(\"doggie\");",
+									"});",
+									"",
+									"console.log(typeof(jsonData.id))",
+									"",
+									"pm.test(\"ID of pet is correct\", function () {",
+									"pm.expect(jsonData.id).to.eql(parseInt(pm.environment.get(\"PET_ID\")))",
+									"});",
+									"",
+									"pm.test(\"Name of pet is correct\", function () {",
+									"pm.expect(jsonData.name).to.eql(pm.environment.get(\"PET_NAME\"))",
+									"});",
+									"",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// pm.environment.set(\"PET_ID\", 123)",
+									"// pm.environment.set(\"PET_NAME\", \"doggie\")",
+									"",
+									"var PET_ID = pm.variables.replaceIn('{{$randomInt}}');",
+									"",
+									"",
+									"pm.sendRequest(\"https://petstore.swagger.io/v2/pet/\" + PET_ID, function (err, response) {",
+									"    var getPetJson = response.json();",
+									"    console.log(getPetJson);",
+									"    pm.test(\"Check\", function() {",
+									"        pm.expect(getPetJson.message).to.eql(\"Pet not found\");",
+									"    });",
+									"});",
+									"",
+									"pm.environment.set(\"PET_ID\", parseInt(PET_ID));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": {{PET_ID}},\n    \"category\": {\n        \"id\": 0,\n        \"name\": \"string\"\n    },\n    \"name\": \"{{PET_NAME}}\",\n    \"photoUrls\": [\n        \"string\"\n    ],\n    \"tags\": [\n        {\n            \"id\": 0,\n            \"name\": \"string\"\n        }\n    ],\n    \"status\": \"available\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://petstore.swagger.io/v2/pet",
+							"protocol": "https",
+							"host": [
+								"petstore",
+								"swagger",
+								"io"
+							],
+							"path": [
+								"v2",
+								"pet"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
