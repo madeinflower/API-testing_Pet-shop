@@ -574,29 +574,29 @@
 									"pm.environment.set(\"SHIP_DATE\", (SHIP_DATE));",
 									"pm.environment.set(\"ORDER_COMPLETE\", (ORDER_COMPLETE)); // какое значение ?",
 									"",
-									"// Функция для генерации случайного элемента из массива для генерации статуса store",
+								
 									"function getRandomItemFromArray(array) {",
 									"    return array[Math.floor(Math.random() * array.length)];",
 									"}",
-									"// Возможные статусы",
+
 									"const statuses = [\"placed\", \"not placed\"];",
-									"// Генерируем случайный статус",
+									
 									"const randomStatus = getRandomItemFromArray(statuses);",
-									"// Заполняем переменные окружения",
+									
 									"pm.environment.set(\"STORE_STATUS\", randomStatus);",
 									"",
-									"// // Функция для генерации случайного элемента из массива для генерации статуса order complete",
+									
 									"// function getRandomItemFromArray(array) {",
 									"//     return array[Math.floor(Math.random() * array.length)];",
 									"// }",
-									"// // Возможные статусы",
+									
 									"// const statuses2 = [\"true\", \"false\"];",
-									"// // Генерируем случайный статус",
+									
 									"// const randomStatus2 = getRandomItemFromArray(statuses2);",
-									"// // Заполняем переменные окружения",
+									
 									"// pm.environment.set(\"ORDER_COMPLETE\", randomStatus2);",
 									"",
-									"// Создаем объект с данными для тела запроса",
+									
 									"var requestBody = {",
 									"  \"id\": pm.environment.get (\"ORDER_ID\"),",
 									"  \"petId\": pm.environment.get (\"PET_ID\"),",
@@ -605,11 +605,11 @@
 									"  \"status\": pm.environment.get (\"STORE_STATUS\"),",
 									"  \"complete\": pm.environment.get (\"ORDER_COMPLETE\")",
 									"};",
-									"// Преобразуем объект в формат JSON и выводим в консоль",
+									
 									"console.log(\"Request body:\");",
 									"console.log(JSON.stringify(requestBody, null, 2));",
 									"",
-									"// Возвращаем тело запроса, которое будет использовано в самом запросе",
+									
 									"return requestBody;"
 								],
 								"type": "text/javascript"
